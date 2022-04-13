@@ -126,6 +126,10 @@ describe("dfsInOrder", function() {
   });
 });
 
+  //       15
+  //   10      20
+  // 1    12       50
+  //   5
 describe("dfsPostOrder", function() {
   it("returns an array of values found with DFS Post Order", function() {
     let binarySearchTree = new BinarySearchTree();

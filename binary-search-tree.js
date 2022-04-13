@@ -70,28 +70,64 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
+    let currentNode = this.root;
 
+
+    while(currentNode){
+      if (val === currentNode.val) return currentNode;
+      else if(val > currentNode.val){
+        currentNode = currentNode.right;
+      }
+      else {
+        currentNode = currentNode.left;
+      }
+    }
+
+    return undefined;
   }
 
   /** findRecursively(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses recursion. */
 
-  findRecursively(val) {
+  findRecursively(val, node = this.root) {
+    if(this.root === null) return undefined;
+    
+    if(val > node.val){
+      if(node.right === null) return undefined;
+      return this.findRecursively(val, node.right);
+    }
+    if(val < node.val){
+      if(node.left === null) return undefined;
+      return this.findRecursively(val, node.left);
+    }
 
+    return node;
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
 
-  dfsPreOrder() {
-
+  dfsPreOrder(node = this.root, travel = []) {
+  
+    if(node){
+      travel.push(node.val);
+      if(node.left) this.dfsPreOrder(node.left, travel);
+      if(node.right) this.dfsPreOrder(node.right, travel);
+    }
+    return travel;
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
-  dfsInOrder() {
-
+  dfsInOrder(node = this.root, travel = []) {
+    if(node){
+      
+      if(node.left) this.dfsInOrder(node.left, travel);
+      travel.push(node.val);
+      if(node.right) this.dfsInOrder(node.right, travel);
+    }
+    return travel;
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
