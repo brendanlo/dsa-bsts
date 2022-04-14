@@ -167,17 +167,23 @@ class BinarySearchTree {
 
   remove(val) {
     let current = this.root;
+    let NodeToDelete = null;
 
     while (current) {
+      if(!current.right && !current.left) return undefined;
       if (current.right.val === val) {
+        NodeToDelete = current.right;
         if (current.right.right){
           current.right = current.right.right;
         } else if (current.right.left) {
           current.right = current.right.left;
         } else {
           current.right = null;
-        }}
+        }
+        return NodeToDelete;
+      }
       else if (current.left.val === val) {
+        NodeToDelete = current.left;
         if (current.left.right){
           current.left = current.left.right;
         } else if (current.left.left) {
@@ -185,6 +191,7 @@ class BinarySearchTree {
         } else {
           current.left = null;
         }
+        return NodeToDelete;
       }
       else {
         if (current.right) current = current.right;
@@ -192,6 +199,7 @@ class BinarySearchTree {
       }
       
     }
+    
   }
 }
 
