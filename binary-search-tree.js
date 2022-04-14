@@ -133,15 +133,32 @@ class BinarySearchTree {
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
-  dfsPostOrder() {
-
+  dfsPostOrder(node = this.root, travel = []) {
+    if(node){
+      
+      if(node.left) this.dfsPostOrder(node.left, travel);
+      if(node.right) this.dfsPostOrder(node.right, travel);
+      travel.push(node.val);
+    }
+    return travel;
   }
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
 
   bfs() {
+    let nodeQueue = [this.root];
+    let visitedNodes = [];
 
+    while (nodeQueue.length) {
+      let current = nodeQueue.shift();
+      visitedNodes.push(current.val);
+      
+      if (current.left) nodeQueue.push(current.left);
+      if (current.right) nodeQueue.push(current.right);
+    }
+
+    return visitedNodes;
   }
 
   /** Further Study!
@@ -149,7 +166,32 @@ class BinarySearchTree {
    * Returns the removed node. */
 
   remove(val) {
+    let current = this.root;
 
+    while (current) {
+      if (current.right.val === val) {
+        if (current.right.right){
+          current.right = current.right.right;
+        } else if (current.right.left) {
+          current.right = current.right.left;
+        } else {
+          current.right = null;
+        }}
+      else if (current.left.val === val) {
+        if (current.left.right){
+          current.left = current.left.right;
+        } else if (current.left.left) {
+          current.left = current.left.left;
+        } else {
+          current.left = null;
+        }
+      }
+      else {
+        if (current.right) current = current.right;
+        if (current.left) current = current.left;
+      }
+      
+    }
   }
 }
 

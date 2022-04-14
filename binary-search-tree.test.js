@@ -191,6 +191,9 @@ describe("remove", function() {
       .insert(5)
       .insert(50);
 
+
+
+
     binarySearchTree.remove(1);
     expect(binarySearchTree.root.left.left.val).toBe(5);
     expect(binarySearchTree.root.left.left.left).toBe(null);
@@ -218,6 +221,14 @@ describe("remove", function() {
       .insert(23)
       .insert(24)
       .insert(70);
+
+  //       15
+  //   10      20
+  // 1    12       50
+  //   5       30     60
+  //        25            70
+  //     23
+  //        24
 
     binarySearchTree.remove(10);
     expect(binarySearchTree.root.left.val).toBe(12);
